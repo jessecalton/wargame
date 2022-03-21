@@ -1,0 +1,265 @@
+@charset "UTF-8";
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+#main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: auto;
+  width: 100vw;
+}
+
+.card {
+  display: inline-block;
+  width: 120px;
+  height: 180px;
+  padding: 8px;
+  position: relative;
+  border: 1px solid #333;
+}
+
+.card.diamonds, .card.hearts {
+  color: #d12d36;
+}
+
+.card.spades, .card.clubs {
+  color: #333;
+}
+
+.suit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 4px;
+  width: 22px;
+  word-break: break-all;
+  line-height: 1;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.suit.upside-down {
+  bottom: 0;
+  right: 0;
+  left: unset;
+  top: unset;
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.rank {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: relative;
+  height: 100%;
+}
+
+.rank::after {
+  display: inline-block;
+  position: absolute;
+  top: 43%;
+  width: 90%;
+  -webkit-transform: translateY(-25%);
+          transform: translateY(-25%);
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.rank-K::after {
+  content: "\265A";
+}
+
+.rank-Q::after {
+  content: "\265B";
+}
+
+.rank-J::after {
+  content: "\265E";
+}
+
+.rank-J::after,
+.rank-Q::after,
+.rank-K::after {
+  top: 25%;
+  font-size: 120px;
+}
+
+.diamonds .rank-2:after {
+  content: " ♦  ♦ ";
+}
+
+.diamonds .rank-3:after {
+  content: " ♦  ♦  ♦ ";
+}
+
+.diamonds .rank-4:after {
+  content: " ♦  ♦  ♦  ♦ ";
+}
+
+.diamonds .rank-5:after {
+  content: " ♦  ♦  ♦  ♦  ♦ ";
+}
+
+.diamonds .rank-6:after {
+  content: " ♦  ♦  ♦  ♦  ♦  ♦ ";
+}
+
+.diamonds .rank-7:after {
+  content: " ♦  ♦  ♦  ♦  ♦  ♦  ♦ ";
+}
+
+.diamonds .rank-8:after {
+  content: " ♦  ♦  ♦  ♦  ♦  ♦  ♦  ♦ ";
+}
+
+.diamonds .rank-9:after {
+  content: " ♦  ♦  ♦  ♦  ♦  ♦  ♦  ♦  ♦ ";
+}
+
+.diamonds .rank-10:after {
+  content: " ♦  ♦  ♦  ♦  ♦  ♦  ♦  ♦  ♦  ♦ ";
+}
+
+.diamonds .rank-A:after {
+  content: "♦";
+  font-size: 80px;
+}
+
+.spades .rank-2:after {
+  content: " ♠  ♠ ";
+}
+
+.spades .rank-3:after {
+  content: " ♠  ♠  ♠ ";
+}
+
+.spades .rank-4:after {
+  content: " ♠  ♠  ♠  ♠ ";
+}
+
+.spades .rank-5:after {
+  content: " ♠  ♠  ♠  ♠  ♠ ";
+}
+
+.spades .rank-6:after {
+  content: " ♠  ♠  ♠  ♠  ♠  ♠ ";
+}
+
+.spades .rank-7:after {
+  content: " ♠  ♠  ♠  ♠  ♠  ♠  ♠ ";
+}
+
+.spades .rank-8:after {
+  content: " ♠  ♠  ♠  ♠  ♠  ♠  ♠  ♠ ";
+}
+
+.spades .rank-9:after {
+  content: " ♠  ♠  ♠  ♠  ♠  ♠  ♠  ♠  ♠ ";
+}
+
+.spades .rank-10:after {
+  content: " ♠  ♠  ♠  ♠  ♠  ♠  ♠  ♠  ♠  ♠ ";
+}
+
+.spades .rank-A:after {
+  content: "♠";
+  font-size: 80px;
+}
+
+.clubs .rank-2:after {
+  content: " ♣  ♣ ";
+}
+
+.clubs .rank-3:after {
+  content: " ♣  ♣  ♣ ";
+}
+
+.clubs .rank-4:after {
+  content: " ♣  ♣  ♣  ♣ ";
+}
+
+.clubs .rank-5:after {
+  content: " ♣  ♣  ♣  ♣  ♣ ";
+}
+
+.clubs .rank-6:after {
+  content: " ♣  ♣  ♣  ♣  ♣  ♣ ";
+}
+
+.clubs .rank-7:after {
+  content: " ♣  ♣  ♣  ♣  ♣  ♣  ♣ ";
+}
+
+.clubs .rank-8:after {
+  content: " ♣  ♣  ♣  ♣  ♣  ♣  ♣  ♣ ";
+}
+
+.clubs .rank-9:after {
+  content: " ♣  ♣  ♣  ♣  ♣  ♣  ♣  ♣  ♣ ";
+}
+
+.clubs .rank-10:after {
+  content: " ♣  ♣  ♣  ♣  ♣  ♣  ♣  ♣  ♣  ♣ ";
+}
+
+.clubs .rank-A:after {
+  content: "♣";
+  font-size: 80px;
+}
+
+.hearts .rank-2:after {
+  content: " ♥  ♥ ";
+}
+
+.hearts .rank-3:after {
+  content: " ♥  ♥  ♥ ";
+}
+
+.hearts .rank-4:after {
+  content: " ♥  ♥  ♥  ♥ ";
+}
+
+.hearts .rank-5:after {
+  content: " ♥  ♥  ♥  ♥  ♥ ";
+}
+
+.hearts .rank-6:after {
+  content: " ♥  ♥  ♥  ♥  ♥  ♥ ";
+}
+
+.hearts .rank-7:after {
+  content: " ♥  ♥  ♥  ♥  ♥  ♥  ♥ ";
+}
+
+.hearts .rank-8:after {
+  content: " ♥  ♥  ♥  ♥  ♥  ♥  ♥  ♥ ";
+}
+
+.hearts .rank-9:after {
+  content: " ♥  ♥  ♥  ♥  ♥  ♥  ♥  ♥  ♥ ";
+}
+
+.hearts .rank-10:after {
+  content: " ♥  ♥  ♥  ♥  ♥  ♥  ♥  ♥  ♥  ♥ ";
+}
+
+.hearts .rank-A:after {
+  content: "♥";
+  font-size: 80px;
+}
+/*# sourceMappingURL=styles.css.map */

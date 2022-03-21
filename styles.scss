@@ -1,0 +1,128 @@
+$suits: (
+  "diamonds": "\2666",
+  "spades": "\2660",
+  "clubs": "\2663",
+  "hearts": "\2665",
+);
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+#main {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  width: 100vw;
+}
+
+.card {
+  display: inline-block;
+  width: 120px;
+  height: 180px;
+  padding: 8px;
+  position: relative;
+  border: 1px solid #333;
+
+  &.diamonds,
+  &.hearts {
+    color: #d12d36;
+  }
+
+  &.spades,
+  &.clubs {
+    color: #333;
+  }
+}
+
+.suit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 4px;
+  width: 22px;
+  word-break: break-all;
+  line-height: 1;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+
+  &.upside-down {
+    bottom: 0;
+    right: 0;
+    left: unset;
+    top: unset;
+    transform: rotate(180deg);
+  }
+}
+
+.rank {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  height: 100%;
+
+  &::after {
+    display: inline-block;
+    position: absolute;
+    top: 43%;
+    width: 90%;
+    transform: translateY(-25%);
+    font-size: 1.5rem;
+    text-align: center;
+  }
+}
+
+.rank-K {
+  &::after {
+    content: "\265A";
+  }
+}
+
+.rank-Q {
+  &::after {
+    content: "\265B";
+  }
+}
+
+.rank-J {
+  &::after {
+    content: "\265E";
+  }
+}
+
+.rank-J,
+.rank-Q,
+.rank-K {
+  &::after {
+    top: 25%;
+    font-size: 120px;
+  }
+}
+
+@mixin repeat($character, $n) {
+  $c: "";
+  @for $i from 1 through $n {
+    $c: $c + " " + $character + " ";
+  }
+  content: $c;
+}
+
+@each $name, $glyph in $suits {
+  .#{$name} {
+    @for $i from 2 through 10 {
+      .rank-#{$i}:after {
+        @include repeat($glyph, $i);
+      }
+    }
+    .rank-A:after {
+      content: $glyph;
+      font-size: 80px;
+    }
+  }
+}
