@@ -18,6 +18,7 @@ body {
   flex-wrap: wrap;
   margin: auto;
   width: 100vw;
+  height: 100vh;
 }
 
 .card {
@@ -36,6 +37,15 @@ body {
   &.spades,
   &.clubs {
     color: #333;
+  }
+
+  &.back {
+    background: radial-gradient(
+      circle,
+      rgba(63, 94, 251, 1) 0%,
+      rgba(135, 104, 204, 1) 51%,
+      rgba(252, 70, 107, 1) 100%
+    );
   }
 }
 
@@ -125,4 +135,16 @@ body {
       font-size: 80px;
     }
   }
+}
+
+.game-area {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 50vh;
+  width: 100%;
+}
+
+.player {
+  border: 1px solid #333;
+  width: 100%;
 }

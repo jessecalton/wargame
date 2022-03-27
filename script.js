@@ -55,13 +55,88 @@ const cardList = [
 
 const main = document.getElementById("main");
 
-for (var i = 0; i < cardList.length; i++) {
-  let item = document.createElement("div");
-  item.classList.add("card", `${cardList[i][0]}`);
-  item.innerHTML = `
-  <div class='suit'>${cardList[i][1]} ${cardList[i][3]}</div>
-  <div class='rank rank-${cardList[i][1]}'></div>
-  <div class='suit upside-down'>${cardList[i][1]} ${cardList[i][3]}</div>
+//
+// Shows all the cards for debugging purposes
+//
+// for (var i = 0; i < cardList.length; i++) {
+//   let item = document.createElement("div");
+//   item.classList.add("card", `${cardList[i][0]}`);
+//   item.innerHTML = `
+//   <div class='suit'>${cardList[i][1]} ${cardList[i][3]}</div>
+//   <div class='rank rank-${cardList[i][1]}'></div>
+//   <div class='suit upside-down'>${cardList[i][1]} ${cardList[i][3]}</div>
+//   `;
+//   main.appendChild(item);
+// }
+//
+// End show all the cards function
+//
+
+/**
+ * Deal cards at the start of the game.
+ */
+function dealCards() {
+  let shuffledCards = shuffleCards(cardList);
+
+  player1.cards = shuffledCards.slice(0, shuffledCards.length / 2);
+  player2.cards = shuffledCards.slice(shuffledCards.length / 2);
+}
+
+/**
+ * Shuffles the array of cards in place.
+ * @param {Array} cards a player's array of cards, derived from the `cardList` array
+ */
+function shuffleCards(cards) {
+  let j, x, i;
+  for (i = cards.length - 1; i > 0; i--) {
+    j = Math.floor(Math.random() * (i + 1));
+    x = cards[i];
+    cards[i] = cards[j];
+    cards[j] = x;
+  }
+  return cards;
+}
+
+class Player {
+  constructor(cards, className) {
+    this.cards = cards;
+    this.className = className;
+  }
+
+  playCard() {
+    return this.cards.pop();
+  }
+}
+
+const player1 = new Player([], "player1");
+const player2 = new Player([], "player2");
+dealCards();
+console.log(player1);
+
+let decks = document.querySelectorAll(".deck");
+
+decks.forEach((deck) => {
+  let parentNode;
+  deck.addEventListener("click", (e) => {
+    parentNode = e.target.parentNode;
+
+    if (parentNode.className.includes("player1")) {
+      playerPlaysCard(player1);
+    }
+
+    if (parentNode.className.includes("player2")) {
+      playerPlaysCard(player2);
+    }
+  });
+});
+
+function playerPlaysCard(player) {
+  let playedCard = player.playCard();
+  let newCard = document.querySelector(`.${player.className} .played-card`);
+  newCard.classList.add("card", `${playedCard[0]}`);
+  newCard.innerHTML = `
+  <div class='suit'>${playedCard[1]} ${playedCard[3]}</div>
+  <div class='rank rank-${playedCard[1]}'></div>
+  <div class='suit upside-down'>${playedCard[1]} ${playedCard[3]}</div>
   `;
-  main.appendChild(item);
 }

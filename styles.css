@@ -16,6 +16,7 @@ body {
       flex-wrap: wrap;
   margin: auto;
   width: 100vw;
+  height: 100vh;
 }
 
 .card {
@@ -33,6 +34,10 @@ body {
 
 .card.spades, .card.clubs {
   color: #333;
+}
+
+.card.back {
+  background: radial-gradient(circle, #3f5efb 0%, #8768cc 51%, #fc466b 100%);
 }
 
 .suit {
@@ -261,5 +266,19 @@ body {
 .hearts .rank-A:after {
   content: "♥";
   font-size: 80px;
+}
+
+.game-area {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  height: 50vh;
+  width: 100%;
+}
+
+.player {
+  border: 1px solid #333;
+  width: 100%;
 }
 /*# sourceMappingURL=styles.css.map */
