@@ -31,6 +31,14 @@ io.on("connection", (socket) => {
 
   console.log(`Player ${playerIndex} has connected`);
 
+  // On Card Played Received
+  socket.on('card-played', card => {
+    console.log(`Card played by ${playerIndex}`, card)
+
+    // Emit the move to the other player
+    socket.broadcast.emit('card-played', card)
+  })
+
   // Ignore player 3
   if (playerIndex === -1) return;
 

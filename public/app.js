@@ -54,8 +54,15 @@ document.addEventListener("DOMContentLoaded", () => {
     ["clubs", "A", 13, "&#9827;"],
   ];
 
+  const main = document.getElementById("main");
+
   let playerNum = 0;
   let currentPlayer = "user";
+  let player1Ready = false;
+  let player2Ready = false;
+  let player1Cards = [];
+  let player2Cards = [];
+  let cardsDealt = false;
 
   const socket = io();
 
@@ -71,8 +78,6 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log(playerNum);
     }
   });
-
-  const main = document.getElementById("main");
 
   //
   // Shows all the cards for debugging purposes
@@ -97,9 +102,14 @@ document.addEventListener("DOMContentLoaded", () => {
   function dealCards() {
     let shuffledCards = shuffleCards(cardList);
 
-    player1.cards = shuffledCards.slice(0, shuffledCards.length / 2);
-    player2.cards = shuffledCards.slice(shuffledCards.length / 2);
+    player1Cards = shuffledCards.slice(0, shuffledCards.length / 2);
+    player2Cards = shuffledCards.slice(shuffledCards.length / 2);
   }
+
+  // card-played received
+  socket.on('card-played', card => {
+    console.log(`${card} was played`);
+  })
 
   /**
    * Shuffles the array of cards in place.
@@ -116,21 +126,20 @@ document.addEventListener("DOMContentLoaded", () => {
     return cards;
   }
 
-  class Player {
-    constructor(cards, className) {
-      this.cards = cards;
-      this.className = className;
-    }
+  // class Player {
+  //   constructor(cards, className) {
+  //     this.cards = cards;
+  //     this.className = className;
+  //   }
 
-    playCard() {
-      return this.cards.pop();
-    }
-  }
+  //   playCard() {
+  //     return this.cards.pop();
+  //   }
+  // }
 
-  const player1 = new Player([], "player1");
-  const player2 = new Player([], "player2");
+  // const player1 = new Player([], "player1");
+  // const player2 = new Player([], "player2");
   dealCards();
-  console.log(player1);
 
   let decks = document.querySelectorAll(".deck");
 
@@ -138,20 +147,20 @@ document.addEventListener("DOMContentLoaded", () => {
     let parentNode;
     deck.addEventListener("click", (e) => {
       parentNode = e.target.parentNode;
-
       if (parentNode.className.includes("player1")) {
-        playerPlaysCard(player1);
+        playerPlaysCard(player1Cards, "player1");
       }
 
       if (parentNode.className.includes("player2")) {
-        playerPlaysCard(player2);
+        playerPlaysCard(player2Cards, "player2");
       }
     });
   });
 
-  function playerPlaysCard(player) {
-    let playedCard = player.playCard();
-    let newCard = document.querySelector(`.${player.className} .played-card`);
+  function playerPlaysCard(cards, playerClass) {
+    let playedCard = cards.pop();
+    socket.emit('card-played', playedCard);
+    let newCard = document.querySelector(`.${playerClass} .played-card`);
     newCard.className = "";
     newCard.classList.add("played-card", "card", `${playedCard[0]}`);
     newCard.innerHTML = `
